@@ -31,8 +31,9 @@ class FileInterface:
             filename = params[0]
             filedata = params[1]
             file_content = base64.b64decode(filedata)
-            fp = open(filename, 'wb')
+            fp = open(filename, 'wb+')
             fp.write(file_content)
+            fp.close()
             return dict(status='OK', data=f'File {filename} successfully uploaded')
         except Exception as e:
             return dict(status='ERROR', data=str(e))
