@@ -17,7 +17,7 @@ def send_command(command_str=""):
         data_received="" #empty string
         while True:
             #socket does not receive all data at once, data comes in part, need to be concatenated at the end of process
-            data = sock.recv(16)
+            data = sock.recv(16384)
             if data:
                 #data is not empty, concat with previous content
                 data_received += data.decode()
@@ -29,7 +29,7 @@ def send_command(command_str=""):
         # at this point, data_received (string) will contain all data coming from the socket
         # to be able to use the data_received as a dict, need to load it using json.loads()
         hasil = json.loads(data_received)
-        logging.warning("data received from server:")
+        logging.warning(f"data received from server: {hasil}")
         return hasil
     except:
         logging.warning("error during data receiving")
@@ -73,7 +73,7 @@ def remote_post(filename=""):
         if (hasil['status']=='OK'):
             return True
         else:
-            print("Gagal")
+            print("Gagal send")
             return False
     except Exception as e:
         print("Gagal")
@@ -93,7 +93,8 @@ def remote_delete(filename=""):
         return False
 
 if __name__=='__main__':
-    server_address=('172.16.16.101',6666)
-    remote_list()
-    remote_get('donalbebek.jpg')
-
+    server_address=('172.16.16.101',6667)
+    # remote_list()
+    # remote_get('donalbebek.jpg')
+    # remote_post('donarudo.jpg')
+    remote_delete('donarudo.jpg')
