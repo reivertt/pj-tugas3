@@ -25,3 +25,6 @@ Sebagai endpoint untuk menghapus file dari server.
 Input: "DELETE {namafile}"  
 Output: Sebuah dict berisi status dan data keterangan
 #### Client
+Mengakses endpoint delete pada server.  
+Input: namafile  
+Output: Sebuah dict berisi status dan data keterangan
